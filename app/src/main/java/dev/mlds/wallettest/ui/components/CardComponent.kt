@@ -3,11 +3,11 @@ package dev.mlds.wallettest.ui.components
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,38 +19,57 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import dev.mlds.wallettest.R
 import dev.mlds.wallettest.domain.models.CardModel
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
 @Composable
-fun CardComponent(card: CardModel) {
+fun CardComponent(card: CardModel, index: Int = 0) {
     var expanded by remember { mutableStateOf(false) }
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { expanded = !expanded }
-            .animateContentSize(),
-        shape = RoundedCornerShape(15.dp),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 5.dp
-        )
-    ) {
-        if (expanded) {
+
+    if (expanded) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { expanded = !expanded }
+                .animateContentSize(),
+            shape = RoundedCornerShape(15.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 5.dp
+            )
+        ) {
             CardBody(card)
-        } else {
+        }
+    } else {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { expanded = !expanded }
+                .animateContentSize(),
+            shape = RoundedCornerShape(20.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 5.dp
+            )
+        ) {
             Column(
                 modifier = Modifier
-                    .background(card.color?.background ?: WalletLigthTheme.cardColors.background)
+                    .background(
+                        card.color?.background ?: WalletLigthTheme.cardColors.background
+                    )
                     .fillMaxWidth()
-                    .padding(horizontal = 15.dp, vertical = 30.dp)
+                    .padding(vertical = 30.dp, horizontal = 16.dp)
             ) {
-                Text(text = card.color?.title.orEmpty())
+                card.color?.let {
+                    Text(
+                        color = it.textColor,
+                        text = it.title
+                    )
+                }
             }
         }
     }
@@ -88,7 +107,7 @@ fun CardComponentPreview() {
                 name = "João Carlos Pereira",
                 validade = "06/29",
                 color = CardModel.CardType.GREEN
-            )
+            ), index = 0
         )
     }
 }

@@ -45,7 +45,7 @@ fun ResumeScreen(
                     primaryIconClick = backClick
                 )
                 CardComponent(
-                    CardModel(
+                    card = CardModel(
                         id = "",
                         number = "**** **** **** 3727",
                         cvv = "1234",

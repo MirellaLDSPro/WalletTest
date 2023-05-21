@@ -57,7 +57,7 @@ fun CardItem(card: CardModel, index: Int) {
                 Row {
                     Text(text = stringResource(id = R.string.doDate))
                     Spacer(modifier = Modifier.size(6.dp))
-                    Text(text = card.validade)
+                    Text(text = card.validade.orEmpty())
                 }
             }
         } else {

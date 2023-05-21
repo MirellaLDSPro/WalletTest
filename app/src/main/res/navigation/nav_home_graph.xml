@@ -22,17 +22,17 @@
         android:id="@+id/cardListFragment"
         android:name="dev.mlds.wallettest.ui.list.CardListFragment"
         android:label="@string/label_home"
-        tools:layout="@layout/fragment_card_list" >
-        <action
-            android:id="@+id/action_cardListFragment_to_resumeFragment"
-            app:destination="@id/resumeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_card_list" />
 
     <fragment
         android:id="@+id/createCardFragment"
         android:name="dev.mlds.wallettest.ui.create.CreateFragment"
         android:label="@string/label_home"
-        tools:layout="@layout/fragment_create" />
+        tools:layout="@layout/fragment_create">
+        <action
+            android:id="@+id/action_createCardFragment_to_resumeFragment"
+            app:destination="@id/resumeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/resumeFragment"

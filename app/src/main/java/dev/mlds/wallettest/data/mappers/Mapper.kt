@@ -13,6 +13,7 @@ fun Cards.toCardsModel(): CardsModel {
                 number = it.number,
                 cvv = it.cvv,
                 name = it.name,
+                validade = it.expirationDate,
                 color = CardModel.CardType.stringToCardType(it.cardType)
             )
         }
@@ -25,6 +26,7 @@ fun Card.toCardModel(): CardModel {
         number = this.number,
         cvv = this.cvv,
         name = this.name,
+        validade = this.expirationDate,
         color = CardModel.CardType.stringToCardType(this.cardType)
     )
 }

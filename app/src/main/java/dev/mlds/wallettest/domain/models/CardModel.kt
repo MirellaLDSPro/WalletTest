@@ -7,7 +7,7 @@ data class CardModel(
     var id: String = "",
     val name: String,
     val number: String,
-    val validade: String = "",
+    val validade: String? = "",
     val color: CardType? = null
 ) {
     enum class CardType(val title: String, val background: Color, val textColor: Color) {

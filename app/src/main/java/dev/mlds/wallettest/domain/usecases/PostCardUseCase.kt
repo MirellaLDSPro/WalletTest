@@ -22,7 +22,9 @@ class PostCardUseCase(private val repository: CardRepository) : SingleUseCase<Ca
                 cvv = params?.cvv.orEmpty(),
                 id = params?.id.orEmpty(),
                 name = params?.name.orEmpty(),
-                number = params?.number.orEmpty()
+                number = params?.number.orEmpty(),
+                expirationDate = params?.validade.orEmpty(),
+                cardType = params?.color?.name.orEmpty()
             )
         ).map { result ->
             when (result) {

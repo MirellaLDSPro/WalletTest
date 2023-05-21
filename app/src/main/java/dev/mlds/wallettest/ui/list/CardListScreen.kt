@@ -5,14 +5,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -52,19 +48,15 @@ fun CardListScreen(
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(WalletLigthTheme.colors.background)
-        ) {
             Column(
-                Modifier.fillMaxSize()
+                Modifier
+                    .fillMaxSize()
+                    .background(WalletLigthTheme.colors.background)
             ) {
                 ToolbarWallet(primaryIconClick = backClick, secondIconClick = createClick)
                 TitleComponent()
                 Body(cards, context)
             }
-        }
     }
 }
 
@@ -78,7 +70,6 @@ private fun Body(
             is Resource.Success -> {
                 CardList(state.data)
             }
-
             is Resource.HttpError -> {
                 Toast.makeText(
                     context,
@@ -94,7 +85,7 @@ private fun Body(
 
 @Composable
 private fun CardList(cardsModel: CardsModel) {
-    var card by remember { mutableStateOf(cardsModel.cards) }
+    var cards by remember { mutableStateOf(cardsModel.cards) }
 
     LazyColumn(
         modifier = Modifier
@@ -103,14 +94,9 @@ private fun CardList(cardsModel: CardsModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        itemsIndexed(card) { index, card ->
-            CardComponent(card = card, index = index)
+        itemsIndexed(cards) { index, card ->
+            CardComponent(card = card, index = index, cards.lastIndex == index)
         }
-
-        item {
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-
         item {
             ThirdButton(
                 onClick = {

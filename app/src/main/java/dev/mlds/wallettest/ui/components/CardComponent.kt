@@ -3,7 +3,6 @@ package dev.mlds.wallettest.ui.components
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -26,14 +25,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.times
 import dev.mlds.wallettest.R
 import dev.mlds.wallettest.domain.models.CardModel
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
 @Composable
-fun CardComponent(card: CardModel, index: Int = 0) {
-    var expanded by remember { mutableStateOf(false) }
+fun CardComponent(card: CardModel, index: Int = 0, isLastItem: Boolean = true) {
+    var expanded by remember { mutableStateOf(isLastItem) }
 
     if (expanded) {
         Card(
@@ -47,55 +45,78 @@ fun CardComponent(card: CardModel, index: Int = 0) {
                 defaultElevation = 5.dp
             )
         ) {
-            CardBody(card)
+            CardOpened(card)
         }
     } else {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .offset { IntOffset(0, index * (-100)) }
+                .offset { IntOffset(0, index * (-95)) }
                 .clickable { expanded = !expanded }
                 .animateContentSize(),
-            shape = RoundedCornerShape(20.dp),
+            shape = RoundedCornerShape(15.dp),
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 5.dp
             )
         ) {
-            Column(
-                modifier = Modifier
-                    .background(
-                        card.color?.background ?: WalletLigthTheme.cardColors.background
-                    )
-                    .fillMaxWidth()
-                    .padding(vertical = 30.dp, horizontal = 16.dp)
-            ) {
-                card.color?.let {
-                    Text(
-                        color = it.textColor,
-                        text = it.title
-                    )
-                }
-            }
+            CardClosed(card)
         }
     }
 }
 
 @Composable
-private fun CardBody(c: CardModel) {
+private fun CardClosed(card: CardModel) {
+    Column(
+        modifier = Modifier
+            .background(
+                card.color?.background ?: WalletLigthTheme.cardColors.background
+            )
+            .height(100.dp)
+            .fillMaxWidth()
+            .padding(vertical = 30.dp, horizontal = 16.dp)
+    ) {
+        card.color?.let {
+            Text(
+                color = it.textColor,
+                text = it.title
+            )
+        }
+    }
+}
+
+@Composable
+private fun CardOpened(c: CardModel) {
     Column(
         modifier = Modifier
             .background(c.color?.background ?: WalletLigthTheme.cardColors.background)
             .fillMaxWidth()
             .padding(horizontal = 15.dp, vertical = 30.dp)
     ) {
-        Text(text = c.color?.title.orEmpty())
-        Spacer(modifier = Modifier.size(30.dp))
-        Text(text = c.name)
-        Text(text = c.number)
-        Row {
-            Text(text = stringResource(id = R.string.doDate))
-            Spacer(modifier = Modifier.size(6.dp))
-            Text(text = c.validade)
+        c.color?.let { item ->
+            Text(
+                color = item.textColor,
+                text = item.title
+            )
+            Spacer(modifier = Modifier.size(30.dp))
+            Text(
+                color = item.textColor,
+                text = c.name
+            )
+            Text(
+                color = item.textColor,
+                text = c.number
+            )
+            Row {
+                Text(
+                    color = item.textColor,
+                    text = stringResource(id = R.string.doDate)
+                )
+                Spacer(modifier = Modifier.size(6.dp))
+                Text(
+                    color = item.textColor,
+                    text = c.validade.orEmpty()
+                )
+            }
         }
     }
 }
@@ -112,7 +133,7 @@ fun CardComponentPreview() {
                 name = "João Carlos Pereira",
                 validade = "06/29",
                 color = CardModel.CardType.GREEN
-            ), index = 0
+            )
         )
     }
 }

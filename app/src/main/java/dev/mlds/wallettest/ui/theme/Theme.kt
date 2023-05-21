@@ -18,6 +18,7 @@ data class ExtendedColors(
     val textEnabled: Color,
     val TitleScreenText: Color,
     val darkText: Color,
+    val ligthText: Color,
     val primaryButton: Color,
     val secondButton: Color,
     val secondButtonText: Color
@@ -44,6 +45,7 @@ private val LocalExtendedColors = staticCompositionLocalOf {
         textEnabled = Color.Unspecified,
         TitleScreenText = Color.Unspecified,
         darkText = Color.Unspecified,
+        ligthText = Color.Unspecified,
         primaryButton = Color.Unspecified,
         secondButton = Color.Unspecified,
         secondButtonText = Color.Unspecified
@@ -76,6 +78,7 @@ fun WalletLigthTheme(
         textEnabled = primary,
         TitleScreenText = TitleScreenText,
         darkText = DarkText,
+        ligthText = LigthText,
         primaryButton = PrimaryButton,
         secondButton = SecondButton,
         secondButtonText = secondButtonText

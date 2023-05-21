@@ -30,7 +30,7 @@ class ResumeFragment : Fragment() {
         }
     }
     private fun nextPage() {
-        findNavController().navigate(R.id.action_resumeFragment_to_splashFragment)
+//        findNavController().navigate(R.id.action_resumeFragment_to_splashFragment)
     }
 
     private fun backClick() {

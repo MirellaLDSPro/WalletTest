@@ -7,6 +7,7 @@ val Background = Color(0xFF142995)
 val ToolbarBackground = Color(0xFFFFFFFF)
 val Text = Color(0xFFFFFFFF)
 val DarkText = Color(0xFF142995)
+val LigthText = Color(0xFF12C2E9)
 val TitleScreenText = Color(0xFF12C2E9)
 
 val PrimaryButton = Color(0xFF12C2E9)

@@ -32,7 +32,7 @@ class CreateFragment : Fragment() {
     }
 
     private fun nextPage(bundle: Bundle) {
-        findNavController().navigate(R.id.action_createCardFragment_to_resumeFragment, bundle)
+//        findNavController().navigate(R.id.action_createCardFragment_to_resumeFragment, bundle)
     }
 
     private fun backClick() {

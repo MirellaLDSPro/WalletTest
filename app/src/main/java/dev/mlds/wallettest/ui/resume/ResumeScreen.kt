@@ -41,7 +41,6 @@ fun ResumeScreen(
 
             Column {
                 ToolbarWallet(
-                    isTransient = true,
                     primaryIconClick = backClick
                 )
                 CardComponent(

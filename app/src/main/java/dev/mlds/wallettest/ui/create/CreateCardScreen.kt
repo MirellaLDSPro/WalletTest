@@ -48,6 +48,7 @@ import dev.mlds.wallettest.domain.models.Resource
 import dev.mlds.wallettest.ui.components.EditableComponent
 import dev.mlds.wallettest.ui.components.EditableImageComponent
 import dev.mlds.wallettest.ui.components.PrimaryButton
+import dev.mlds.wallettest.ui.components.ToolbarTransparentWallet
 import dev.mlds.wallettest.ui.components.ToolbarWallet
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 import org.koin.androidx.compose.koinViewModel
@@ -103,8 +104,7 @@ fun CardCreateScreen(
             }
 
             Column {
-                ToolbarWallet(
-                    isTransient = true,
+                ToolbarTransparentWallet(
                     primaryIconClick = backClick
                 )
                 CreateForm() {

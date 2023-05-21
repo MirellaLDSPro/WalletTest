@@ -77,8 +77,7 @@ private fun Body(
                     context,
                     stringResource(id = R.string.request_error),
                     Toast.LENGTH_LONG
-                )
-                    .show()
+                ).show()
             }
             else -> Unit
         }

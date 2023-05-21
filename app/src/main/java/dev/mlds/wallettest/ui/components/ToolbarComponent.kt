@@ -4,17 +4,20 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -25,7 +28,6 @@ import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
 @Composable
 fun ToolbarWallet(
-    isTransient: Boolean = false,
     primaryIconClick: () -> Unit = {},
     secondIconClick: (() -> Unit)? = null
 ) {
@@ -35,14 +37,11 @@ fun ToolbarWallet(
             defaultElevation = 10.dp
         )
     ) {
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .background(WalletLigthTheme.colors.ToolbarBackground)
-                .padding(21.dp)
-        ) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(WalletLigthTheme.colors.ToolbarBackground)
+                    .padding(21.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Image(
@@ -55,7 +54,6 @@ fun ToolbarWallet(
                 ) {
                     Text(
                         modifier = Modifier
-                            .fillMaxWidth()
                             .padding(horizontal = 10.dp),
                         textAlign = TextAlign.Center,
                         color = WalletLigthTheme.colors.darkText,
@@ -69,6 +67,42 @@ fun ToolbarWallet(
                     contentDescription = stringResource(id = R.string.create)
                 )
             }
+    }
+}
+
+@Composable
+fun ToolbarTransparentWallet(
+    primaryIconClick: () -> Unit = {}
+) {
+    Card(
+        shape = RoundedCornerShape(0.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.Transparent,
+        )
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(21.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                modifier = Modifier.clickable { primaryIconClick() },
+                painter = painterResource(R.drawable.ic_btn_back),
+                contentDescription = stringResource(id = R.string.back)
+            )
+            ProvideTextStyle(
+                value = WalletLigthTheme.typography.header
+            ) {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 10.dp),
+                    textAlign = TextAlign.Center,
+                    text = stringResource(id = R.string.create_card_title)
+                )
+            }
         }
     }
 }
@@ -77,6 +111,6 @@ fun ToolbarWallet(
 @Composable
 fun ToolbarWalletPreview() {
     WalletLigthTheme {
-        ToolbarWallet()
+        ToolbarTransparentWallet()
     }
 }

@@ -12,6 +12,10 @@ data class Card(
     @SerializedName("name")
     val name: String,
     @SerializedName("number")
-    val number: String
+    val number: String,
+    @SerializedName("expirationDate")
+    val expirationDate: String,
+    @SerializedName("cardType")
+    val cardType: String
 )
 

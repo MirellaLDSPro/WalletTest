@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.mlds.wallettest.R
+import dev.mlds.wallettest.domain.models.CardModel
 import dev.mlds.wallettest.ui.components.CardComponent
 import dev.mlds.wallettest.ui.components.PrimaryButton
 import dev.mlds.wallettest.ui.components.ToolbarWallet
@@ -40,10 +41,18 @@ fun ResumeScreen(
 
             Column {
                 ToolbarWallet(
-                    isTransient = true,
                     primaryIconClick = backClick
                 )
-                CardComponent()
+                CardComponent(
+                    card = CardModel(
+                        id = "",
+                        number = "**** **** **** 3727",
+                        cvv = "1234",
+                        name = "João Carlos Pereira",
+                        validade = "06/29",
+                        color = CardModel.CardType.GREEN
+                    )
+                )
                 Spacer(modifier = Modifier.size(22.dp))
                 PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),

@@ -13,6 +13,10 @@ import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
 class CreateFragment : Fragment() {
 
+    companion object {
+        const val CREATE_DATA = "CREATE_DATA"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,8 +31,8 @@ class CreateFragment : Fragment() {
         }
     }
 
-    private fun nextPage() {
-        findNavController().navigate(R.id.action_cardListFragment_to_resumeFragment)
+    private fun nextPage(bundle: Bundle) {
+        findNavController().navigate(R.id.action_createCardFragment_to_resumeFragment)
     }
 
     private fun backClick() {

@@ -1,22 +1,24 @@
 package dev.mlds.wallettest.ui.list
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -46,19 +48,15 @@ fun CardListScreen(
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(WalletLigthTheme.colors.background)
-        ) {
             Column(
-                Modifier.fillMaxSize()
+                Modifier
+                    .fillMaxSize()
+                    .background(WalletLigthTheme.colors.background)
             ) {
                 ToolbarWallet(primaryIconClick = backClick, secondIconClick = createClick)
                 TitleComponent()
                 Body(cards, context)
             }
-        }
     }
 }
 
@@ -79,28 +77,33 @@ private fun Body(
                     Toast.LENGTH_LONG
                 ).show()
             }
+
             else -> Unit
         }
     }
 }
 
 @Composable
-private fun CardList(cards: CardsModel) {
-    Column(
+private fun CardList(cardsModel: CardsModel) {
+    var cards by remember { mutableStateOf(cardsModel.cards) }
+
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(30.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        LazyColumn() {
-            items(cards.cards) {
-                CardComponent()
-            }
+        itemsIndexed(cards) { index, card ->
+            CardComponent(card = card, index = index, cards.lastIndex == index)
         }
-        Spacer(modifier = Modifier.size(15.dp))
-        ThirdButton(onClick = { /*TODO*/ }) {
-            Text(text = stringResource(id = R.string.use_this_card))
+        item {
+            ThirdButton(
+                onClick = {
+                    Log.i(">>>", "Usar este cartão")
+                }) {
+                Text(text = stringResource(id = R.string.use_this_card))
+            }
         }
     }
 }

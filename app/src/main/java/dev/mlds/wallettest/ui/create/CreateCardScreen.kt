@@ -1,5 +1,6 @@
 package dev.mlds.wallettest.ui.create
 
+import android.os.Bundle
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -40,13 +42,16 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.os.bundleOf
 import dev.mlds.wallettest.R
 import dev.mlds.wallettest.domain.models.CardModel
 import dev.mlds.wallettest.domain.models.Resource
+import dev.mlds.wallettest.ui.commons.MaskUtil
+import dev.mlds.wallettest.ui.components.DateTextField
 import dev.mlds.wallettest.ui.components.EditableComponent
 import dev.mlds.wallettest.ui.components.EditableImageComponent
 import dev.mlds.wallettest.ui.components.PrimaryButton
-import dev.mlds.wallettest.ui.components.ToolbarWallet
+import dev.mlds.wallettest.ui.components.ToolbarTransparentWallet
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 import org.koin.androidx.compose.koinViewModel
 
@@ -54,7 +59,7 @@ import org.koin.androidx.compose.koinViewModel
 fun CardCreateScreen(
     viewModel: CreateCardViewModel = koinViewModel(),
     backClick: () -> Unit = {},
-    nextPage: () -> Unit = {}
+    nextPage: (Bundle) -> Unit = {}
 ) {
 
     val context = LocalContext.current
@@ -73,7 +78,8 @@ fun CardCreateScreen(
 
             when (card.value) {
                 is Resource.Success -> {
-                    nextPage()
+                    val resp = card.value as Resource.Success
+                    nextPage(bundleOf( CreateFragment.CREATE_DATA to ""))
                 }
 
                 is Resource.Loading -> {
@@ -100,8 +106,7 @@ fun CardCreateScreen(
             }
 
             Column {
-                ToolbarWallet(
-                    isTransient = true,
+                ToolbarTransparentWallet(
                     primaryIconClick = backClick
                 )
                 CreateForm() {
@@ -156,63 +161,43 @@ fun CreateForm(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            ProvideTextStyle(
-                value = WalletLigthTheme.typography.body
-            ) {
-                TextField(
-                    value = valueDate,
-                    onValueChange = { valueDate = it },
-                    modifier = Modifier
-                        .weight(1f),
-                    placeholder = {
-                        Text(
-                            color = WalletLigthTheme.colors.primary,
-                            text = stringResource(id = R.string.card_final_date)
-                        )
-                    },
-                    colors = TextFieldDefaults.textFieldColors(
-                        containerColor = Color.White,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        textColor = WalletLigthTheme.colors.primary,
-                        cursorColor = WalletLigthTheme.colors.primary,
-                        disabledTextColor = WalletLigthTheme.colors.textEnabled
-                    ),
-                    textStyle = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp
-                    )
-                )
-            }
+            DateTextField(
+                modifier = Modifier.weight(1f),
+                label = stringResource(id = R.string.card_final_date),
+                onValueChange = { valueDate = it },
+                textLength = MaskUtil.DATE_LENGTH
+            )
             Spacer(modifier = Modifier.size(8.dp))
             ProvideTextStyle(
                 value = WalletLigthTheme.typography.body
             ) {
                 TextField(
                     value = valuePassword,
-                    onValueChange = { valuePassword = it },
+                    onValueChange = { if (it.length <= 4) { valuePassword = it } },
                     modifier = Modifier
                         .weight(1f),
+                    shape = AbsoluteRoundedCornerShape(6.dp),
                     placeholder = {
                         Text(
                             color = WalletLigthTheme.colors.primary,
-                            text = stringResource(id = R.string.card_security_code)
+                            text = stringResource(id = R.string.card_cs)
                         )
                     },
-                    colors = TextFieldDefaults.textFieldColors(
-                        containerColor = Color.White,
+                    colors = TextFieldDefaults.colors(
+                        disabledTextColor = WalletLigthTheme.colors.enabledColor,
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White,
+                        disabledContainerColor = Color.White,
+                        cursorColor = WalletLigthTheme.colors.primary,
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
-                        textColor = WalletLigthTheme.colors.primary,
-                        cursorColor = WalletLigthTheme.colors.primary,
-                        disabledTextColor = WalletLigthTheme.colors.textEnabled
                     ),
                     textStyle = TextStyle(
                         color = Color.Black,
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp
                     ),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     visualTransformation = if (showPassword) {
                         VisualTransformation.None
                     } else {

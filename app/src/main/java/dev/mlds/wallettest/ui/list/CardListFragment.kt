@@ -8,7 +8,11 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import dev.mlds.wallettest.R
 import dev.mlds.wallettest.databinding.FragmentCardListBinding
+import dev.mlds.wallettest.domain.models.CardModel
+import dev.mlds.wallettest.domain.models.CardsModel
+import dev.mlds.wallettest.ui.test.CardList
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
 class CardListFragment : Fragment() {
@@ -25,11 +29,16 @@ class CardListFragment : Fragment() {
             setContent {
                 WalletLigthTheme {
                     CardListScreen(
-                        backClick = ::backClick
+                        backClick = ::backClick,
+                        createClick = ::nextPageClick
                     )
                 }
             }
         }
+    }
+
+    private fun nextPageClick() {
+        findNavController().navigate(R.id.action_cardListFragment_to_createCardFragment)
     }
 
     private fun backClick() {

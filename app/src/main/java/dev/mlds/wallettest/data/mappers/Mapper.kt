@@ -6,7 +6,7 @@ import dev.mlds.wallettest.domain.models.CardsModel
 
 fun Cards.toCardsModel(): CardsModel {
     return CardsModel(
-        cards.map {
+        this.map {
             CardModel(
                 id = it.id,
                 number = it.number,

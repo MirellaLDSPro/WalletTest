@@ -15,7 +15,8 @@ data class ExtendedColors(
     val background: Color,
     val text: Color,
     val primary: Color,
-    val textEnabled: Color,
+    val enabledColor: Color,
+    val enabledTextColor: Color,
     val TitleScreenText: Color,
     val darkText: Color,
     val ligthText: Color,
@@ -33,7 +34,9 @@ data class CardColors(
 @Immutable
 data class CustomTypography(
     val body: TextStyle,
-    val title: TextStyle
+    val title: TextStyle,
+    val label: TextStyle,
+    val header: TextStyle
 )
 
 private val LocalExtendedColors = staticCompositionLocalOf {
@@ -42,7 +45,8 @@ private val LocalExtendedColors = staticCompositionLocalOf {
         background = Color.Unspecified,
         text = Color.Unspecified,
         primary = Color.Unspecified,
-        textEnabled = Color.Unspecified,
+        enabledColor = Color.Unspecified,
+        enabledTextColor = Color.Unspecified,
         TitleScreenText = Color.Unspecified,
         darkText = Color.Unspecified,
         ligthText = Color.Unspecified,
@@ -62,7 +66,9 @@ private val LocalCardColors = staticCompositionLocalOf {
 val LocalCustomTypography = staticCompositionLocalOf {
     CustomTypography(
         body = TextStyle.Default,
-        title = TextStyle.Default
+        title = TextStyle.Default,
+        label = TextStyle.Default,
+        header = TextStyle.Default
     )
 }
 
@@ -75,7 +81,8 @@ fun WalletLigthTheme(
         background = Background,
         text = Text,
         primary = primary,
-        textEnabled = primary,
+        enabledColor = EnabledColor,
+        enabledTextColor = EnabledTextColor,
         TitleScreenText = TitleScreenText,
         darkText = DarkText,
         ligthText = LigthText,
@@ -91,7 +98,9 @@ fun WalletLigthTheme(
 
     val customTypography = CustomTypography(
         body = TextStyle(fontSize = 16.sp),
-        title = TextStyle(fontSize = 28.sp)
+        title = TextStyle(fontSize = 28.sp),
+        label = TextStyle(fontSize = 14.sp, color = fieldTitle),
+        header = TextStyle(fontSize = 22.sp, color = LigthText)
     )
     CompositionLocalProvider(
         LocalExtendedColors provides extendedColors,

@@ -49,7 +49,6 @@ import dev.mlds.wallettest.ui.components.EditableComponent
 import dev.mlds.wallettest.ui.components.EditableImageComponent
 import dev.mlds.wallettest.ui.components.PrimaryButton
 import dev.mlds.wallettest.ui.components.ToolbarTransparentWallet
-import dev.mlds.wallettest.ui.components.ToolbarWallet
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 import org.koin.androidx.compose.koinViewModel
 
@@ -178,7 +177,7 @@ fun CreateForm(
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
                         cursorColor = WalletLigthTheme.colors.primary,
-                        disabledTextColor = WalletLigthTheme.colors.textEnabled
+                        disabledTextColor = WalletLigthTheme.colors.enabledColor
                     ),
                     textStyle = TextStyle(
                         color = Color.Black,
@@ -207,7 +206,7 @@ fun CreateForm(
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
                         cursorColor = WalletLigthTheme.colors.primary,
-                        disabledTextColor = WalletLigthTheme.colors.textEnabled
+                        disabledTextColor = WalletLigthTheme.colors.enabledColor
                     ),
                     textStyle = TextStyle(
                         color = Color.Black,

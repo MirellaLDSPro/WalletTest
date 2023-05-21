@@ -1,7 +1,6 @@
 package dev.mlds.wallettest.ui.theme
 
 import androidx.compose.ui.graphics.Color
-import org.w3c.dom.Text
 
 val Background = Color(0xFF142995)
 val ToolbarBackground = Color(0xFFFFFFFF)
@@ -20,7 +19,7 @@ var cardBlackText = Color(0xFFFFFFFF)
 var cardBlack = Color(0xFF000000)
 
 val primary = Color(0xFF000000)
-val textEnabled = Color(0xFFBBBBBB)
+val EnabledColor = Color(0xFFEEEEEE)
+val EnabledTextColor = Color(0xFFBBBBBB)
 
 val fieldTitle = Color(0xFFFFFFFF)
-val fieldTitleEnabled = Color(0xFFBBBBBB)

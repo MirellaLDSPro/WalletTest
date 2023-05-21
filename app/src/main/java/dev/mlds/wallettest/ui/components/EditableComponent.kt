@@ -3,6 +3,7 @@ package dev.mlds.wallettest.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ProvideTextStyle
@@ -20,9 +21,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.mlds.wallettest.R
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
@@ -34,17 +34,15 @@ fun EditableImageComponent(
     showRigthIcon: Boolean = true,
     modifier: Modifier = Modifier,
     onChangeText: (value: String) -> Unit,
-    visualTransformation: VisualTransformation? = null,
     keyboardOptions: KeyboardOptions? = null
 ) {
     var value by remember { mutableStateOf("") }
 
     Column(modifier = modifier) {
         ProvideTextStyle(
-            value = WalletLigthTheme.typography.body
+            value = WalletLigthTheme.typography.label
         ) {
             Text(
-                color = WalletLigthTheme.colors.text,
                 modifier = Modifier.fillMaxWidth(),
                 text = label
             )
@@ -53,6 +51,7 @@ fun EditableImageComponent(
         TextField(
             modifier = modifier,
             value = value,
+            shape = AbsoluteRoundedCornerShape(6.dp),
             onValueChange = {
                 value = it
                 onChangeText(it)
@@ -63,7 +62,7 @@ fun EditableImageComponent(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 cursorColor = WalletLigthTheme.colors.primary,
-                disabledTextColor = WalletLigthTheme.colors.textEnabled
+                disabledTextColor = WalletLigthTheme.colors.enabledColor
             ),
             textStyle = TextStyle(
                 color = Color.Black,
@@ -96,10 +95,9 @@ fun EditableComponent(
     Column {
         label?.let {
             ProvideTextStyle(
-                value = WalletLigthTheme.typography.body
+                value = WalletLigthTheme.typography.label
             ) {
                 Text(
-                    color = WalletLigthTheme.colors.text,
                     modifier = modifier,
                     text = label
                 )
@@ -119,7 +117,7 @@ fun EditableComponent(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 cursorColor = WalletLigthTheme.colors.primary,
-                disabledTextColor = WalletLigthTheme.colors.textEnabled
+                disabledTextColor = WalletLigthTheme.colors.enabledColor
             ),
             textStyle = TextStyle(
                 color = Color.Black,
@@ -130,14 +128,13 @@ fun EditableComponent(
     }
 }
 
-@Preview(name = "Editable component")
+@Preview(name = "Editable component", backgroundColor = 0xFF142995, showBackground = true)
 @Composable
 fun EditableComponentPreview() {
     WalletLigthTheme {
         Column {
             EditableImageComponent(
                 onChangeText = {},
-                visualTransformation = PasswordVisualTransformation()
             )
             EditableComponent(
                 label = "Test",

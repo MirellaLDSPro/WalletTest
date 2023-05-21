@@ -1,37 +1,30 @@
-package dev.mlds.wallettest.ui.create
+package dev.mlds.wallettest.ui.splash
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import dev.mlds.wallettest.R
+import dev.mlds.wallettest.ui.resume.ResumeScreen
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
-class CreateFragment : Fragment() {
+class SplashFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
+        // Inflate the layout for this fragment
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 WalletLigthTheme {
-                    CardCreateScreen(backClick = ::backClick, nextPage = ::nextPage)
+                    SplashScreen()
                 }
             }
         }
-    }
-
-    private fun nextPage() {
-        findNavController().navigate(R.id.action_cardListFragment_to_resumeFragment)
-    }
-
-    private fun backClick() {
-        findNavController().popBackStack()
     }
 }

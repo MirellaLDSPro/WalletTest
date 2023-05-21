@@ -15,7 +15,8 @@ import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 fun PrimaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
+    enabled: Boolean = true
 ) {
     Button(
         colors = ButtonDefaults.buttonColors(
@@ -23,6 +24,7 @@ fun PrimaryButton(
             contentColor = WalletLigthTheme.colors.text
         ),
         modifier = modifier.height(55.dp),
+        enabled = enabled,
         onClick = onClick,
         content = {
             ProvideTextStyle(

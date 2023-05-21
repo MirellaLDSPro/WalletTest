@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.mlds.wallettest.R
@@ -24,8 +25,9 @@ import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
 @Composable
 fun ToolbarWallet(
+    isTransient: Boolean = false,
     primaryIconClick: () -> Unit = {},
-    secondIconClick: () -> Unit = {}
+    secondIconClick: (() -> Unit)? = null
 ) {
     Card(
         shape = RoundedCornerShape(0.dp),
@@ -52,13 +54,17 @@ fun ToolbarWallet(
                     value = WalletLigthTheme.typography.title
                 ) {
                     Text(
-                        modifier = Modifier.padding(horizontal = 10.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 10.dp),
+                        textAlign = TextAlign.Center,
                         color = WalletLigthTheme.colors.darkText,
                         text = stringResource(id = R.string.label_home)
                     )
                 }
                 Image(
-                    modifier = Modifier.clickable { secondIconClick() },
+                    modifier = Modifier
+                        .clickable { secondIconClick?.invoke() },
                     painter = painterResource(R.drawable.ic_btn_plus),
                     contentDescription = stringResource(id = R.string.create)
                 )

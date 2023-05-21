@@ -4,6 +4,6 @@ import dev.mlds.wallettest.domain.models.Resource
 import kotlinx.coroutines.flow.Flow
 
 
-interface SingleUseCase<R> {
-    suspend fun execute(): Flow<Resource<R>>
+interface SingleUseCase<R, P> {
+    suspend fun execute(params: P? = null): Flow<Resource<R>>
 }

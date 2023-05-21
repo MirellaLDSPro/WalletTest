@@ -12,7 +12,8 @@ fun Cards.toCardsModel(): CardsModel {
                 id = it.id,
                 number = it.number,
                 cvv = it.cvv,
-                name = it.name
+                name = it.name,
+                color = CardModel.CardType.stringToCardType(it.cardType)
             )
         }
     )
@@ -23,6 +24,7 @@ fun Card.toCardModel(): CardModel {
         id = this.id,
         number = this.number,
         cvv = this.cvv,
-        name = this.name
+        name = this.name,
+        color = CardModel.CardType.stringToCardType(this.cardType)
     )
 }

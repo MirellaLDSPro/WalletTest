@@ -9,6 +9,9 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import dev.mlds.wallettest.databinding.FragmentCardListBinding
+import dev.mlds.wallettest.domain.models.CardModel
+import dev.mlds.wallettest.domain.models.CardsModel
+import dev.mlds.wallettest.ui.test.CardList
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
 class CardListFragment : Fragment() {
@@ -27,6 +30,28 @@ class CardListFragment : Fragment() {
                     CardListScreen(
                         backClick = ::backClick
                     )
+//                    CardList(
+//                        CardsModel(
+//                            cards = listOf(
+//                                CardModel(
+//                                    id = "",
+//                                    number = "**** **** **** 3727",
+//                                    cvv = "1234",
+//                                    name = "João Carlos Pereira",
+//                                    validade = "06/29",
+//                                    color = CardModel.CardType.GREEN
+//                                ),
+//                                CardModel(
+//                                    id = "",
+//                                    number = "**** **** **** 3727",
+//                                    cvv = "1234",
+//                                    name = "João Carlos Pereira",
+//                                    validade = "06/29",
+//                                    color = CardModel.CardType.BLACK
+//                                )
+//                            )
+//                        )
+//                    )
                 }
             }
         }

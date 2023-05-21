@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitConfig {
-    private const val BASE_URL = "https://wallet-test-backend.vercel.app"
+    private const val BASE_URL = "https://wallet-backend-bay.vercel.app/"
     private const val OK_HTTP = "Ok Http"
 
     private fun config() = Retrofit.Builder()

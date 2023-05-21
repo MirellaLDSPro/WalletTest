@@ -174,7 +174,6 @@ fun CreateForm(
                         containerColor = Color.White,
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
-                        textColor = WalletLigthTheme.colors.primary,
                         cursorColor = WalletLigthTheme.colors.primary,
                         disabledTextColor = WalletLigthTheme.colors.textEnabled
                     ),
@@ -204,7 +203,6 @@ fun CreateForm(
                         containerColor = Color.White,
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
-                        textColor = WalletLigthTheme.colors.primary,
                         cursorColor = WalletLigthTheme.colors.primary,
                         disabledTextColor = WalletLigthTheme.colors.textEnabled
                     ),

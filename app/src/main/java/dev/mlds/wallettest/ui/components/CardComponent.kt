@@ -1,6 +1,8 @@
 package dev.mlds.wallettest.ui.components
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,41 +15,63 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.mlds.wallettest.R
+import dev.mlds.wallettest.domain.models.CardModel
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
 @Composable
-fun CardComponent() {
+fun CardComponent(card: CardModel) {
+    var expanded by remember { mutableStateOf(false) }
     Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { expanded = !expanded }
+            .animateContentSize(),
         shape = RoundedCornerShape(15.dp),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 5.dp
         )
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(WalletLigthTheme.cardColors.background),
-            contentAlignment = Alignment.Center
-        ) {
+        if (expanded) {
+            CardBody(card)
+        } else {
             Column(
                 modifier = Modifier
+                    .background(card.color?.background ?: WalletLigthTheme.cardColors.background)
                     .fillMaxWidth()
                     .padding(horizontal = 15.dp, vertical = 30.dp)
             ) {
-                Text(text = "Green Card")
-                Spacer(modifier = Modifier.size(30.dp))
-                Text(text = "João Carlos Pereira")
-                Text(text = "**** **** **** 3727")
-                Row {
-                    Text(text = "Validade")
-                    Spacer(modifier = Modifier.size(6.dp))
-                    Text(text = "06/29")
-                }
+                Text(text = card.color?.title.orEmpty())
             }
+        }
+    }
+}
+
+@Composable
+private fun CardBody(c: CardModel) {
+    Column(
+        modifier = Modifier
+            .background(c.color?.background ?: WalletLigthTheme.cardColors.background)
+            .fillMaxWidth()
+            .padding(horizontal = 15.dp, vertical = 30.dp)
+    ) {
+        Text(text = c.color?.title.orEmpty())
+        Spacer(modifier = Modifier.size(30.dp))
+        Text(text = c.name)
+        Text(text = c.number)
+        Row {
+            Text(text = stringResource(id = R.string.doDate))
+            Spacer(modifier = Modifier.size(6.dp))
+            Text(text = c.validade)
         }
     }
 }
@@ -56,6 +80,15 @@ fun CardComponent() {
 @Composable
 fun CardComponentPreview() {
     WalletLigthTheme {
-        CardComponent()
+        CardComponent(
+            CardModel(
+                id = "",
+                number = "**** **** **** 3727",
+                cvv = "1234",
+                name = "João Carlos Pereira",
+                validade = "06/29",
+                color = CardModel.CardType.GREEN
+            )
+        )
     }
 }

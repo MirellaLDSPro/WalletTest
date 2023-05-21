@@ -1,5 +1,6 @@
 package dev.mlds.wallettest.data.mappers
 
+import dev.mlds.wallettest.data.models.Card
 import dev.mlds.wallettest.data.models.Cards
 import dev.mlds.wallettest.domain.models.CardModel
 import dev.mlds.wallettest.domain.models.CardsModel
@@ -14,5 +15,14 @@ fun Cards.toCardsModel(): CardsModel {
                 name = it.name
             )
         }
+    )
+}
+
+fun Card.toCardModel(): CardModel {
+    return CardModel(
+        id = this.id,
+        number = this.number,
+        cvv = this.cvv,
+        name = this.name
     )
 }

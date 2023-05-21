@@ -1,8 +1,8 @@
 package dev.mlds.wallettest.domain.models
 
 data class CardModel(
-    val cvv: String,
-    val id: String,
-    val name: String,
-    val number: String
+    var cvv: String,
+    var id: String = "",
+    var name: String,
+    var number: String
 )

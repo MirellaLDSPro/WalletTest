@@ -1,4 +1,4 @@
-package dev.mlds.wallettest.ui.cardList
+package dev.mlds.wallettest.ui.list
 
 import android.os.Bundle
 import android.view.LayoutInflater

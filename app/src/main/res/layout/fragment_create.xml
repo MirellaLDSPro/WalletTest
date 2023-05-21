@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.list.CardListFragment">
+    tools:context=".ui.create.CreateFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/list_card" />
+        android:text="@string/create_card_screen" />
 
 </FrameLayout>

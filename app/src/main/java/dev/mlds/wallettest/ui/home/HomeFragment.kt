@@ -23,7 +23,8 @@ class HomeFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 HomeScreen(
-                    openList = ::openListScreen
+                    openList = ::openListScreen,
+                    openCreate = ::openCreateScreen
                 )
             }
         }
@@ -31,5 +32,9 @@ class HomeFragment : Fragment() {
 
     private fun openListScreen() {
         findNavController().navigate(R.id.action_homeFragment_to_cardListFragment)
+    }
+
+    private fun openCreateScreen() {
+        findNavController().navigate(R.id.action_homeFragment_to_createCardFragment)
     }
 }

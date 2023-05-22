@@ -1,5 +1,8 @@
 package dev.mlds.wallettest.ui.components
 
+import android.content.Context
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -31,6 +34,7 @@ import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
 @Composable
 fun CardComponent(
+    context: Context = LocalContext.current,
     card: CardModel,
     index: Int = 0,
     isLastItem: Boolean = true,
@@ -60,12 +64,17 @@ fun CardComponent(
                 CardOpened(card)
             }
 
-            if (canUseItem && isLastItem) {
+            if (canUseItem) {
                 Spacer(modifier = Modifier.height(50.dp))
                 PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = { /*TODO*/ },
-                    content = { Text(text = stringResource(id = R.string.next_button)) }
+                    onClick = {
+                        Toast.makeText(context, "Pagar com cartão selecionado", Toast.LENGTH_LONG)
+                            .show()
+                    },
+                    content = {
+                        Text(text = stringResource(id = R.string.pay_with_then))
+                    }
                 )
                 Spacer(modifier = Modifier.height(50.dp))
             }
@@ -153,7 +162,7 @@ private fun CardOpened(c: CardModel) {
 fun CardComponentPreview() {
     WalletLigthTheme {
         CardComponent(
-            CardModel(
+            card = CardModel(
                 id = "",
                 number = "**** **** **** 3727",
                 cvv = "1234",

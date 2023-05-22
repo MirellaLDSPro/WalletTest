@@ -11,10 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import dev.mlds.wallettest.R
 import dev.mlds.wallettest.domain.models.CardModel
+import dev.mlds.wallettest.ui.commons.BaseFragment
 import dev.mlds.wallettest.ui.create.CreateFragment
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
-class ResumeFragment : Fragment() {
+class ResumeFragment : BaseFragment() {
 
     private var card: CardModel? = null
 
@@ -31,7 +32,6 @@ class ResumeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
@@ -39,17 +39,15 @@ class ResumeFragment : Fragment() {
                     ResumeScreen(
                         card,
                         backClick = ::backClick,
-                        nextPage = ::nextPage
+                        nextPage = ::nextPageClick
                     )
                 }
             }
         }
     }
-    private fun nextPage() {
+
+    override fun nextPageClick() {
         findNavController().navigate(R.id.nav_to_splash)
     }
 
-    private fun backClick() {
-        findNavController().popBackStack()
-    }
 }

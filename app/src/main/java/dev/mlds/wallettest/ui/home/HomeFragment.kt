@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import dev.mlds.wallettest.R
 import dev.mlds.wallettest.databinding.FragmentHomeBinding
+import dev.mlds.wallettest.ui.commons.BaseFragment
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
     private lateinit var viewBinding: FragmentHomeBinding
 
     override fun onCreateView(
@@ -23,18 +22,10 @@ class HomeFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 HomeScreen(
-                    openList = ::openListScreen,
-                    openCreate = ::openCreateScreen
+                    openList = { openScreen(navigationId = R.id.action_homeFragment_to_cardListFragment) },
+                    openCreate = { openScreen(navigationId = R.id.action_homeFragment_to_createCardFragment) }
                 )
             }
         }
-    }
-
-    private fun openListScreen() {
-        findNavController().navigate(R.id.action_homeFragment_to_cardListFragment)
-    }
-
-    private fun openCreateScreen() {
-        findNavController().navigate(R.id.action_homeFragment_to_createCardFragment)
     }
 }

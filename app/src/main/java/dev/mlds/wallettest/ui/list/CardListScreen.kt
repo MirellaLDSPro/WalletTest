@@ -1,7 +1,6 @@
 package dev.mlds.wallettest.ui.list
 
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -36,6 +35,8 @@ import dev.mlds.wallettest.ui.components.ToolbarWallet
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 import org.koin.androidx.compose.koinViewModel
 
+private const val FIRST_POSITION = 0
+
 @Composable
 fun CardListScreen(
     backClick: () -> Unit = {},
@@ -69,7 +70,7 @@ private fun Body(
     data.value?.let { state ->
         when (state) {
             is Resource.Success -> {
-                CardList(state.data)
+                CardList(state.data, context)
             }
             is Resource.HttpError -> {
                 Toast.makeText(
@@ -85,7 +86,7 @@ private fun Body(
 }
 
 @Composable
-private fun CardList(cardsModel: CardsModel) {
+private fun CardList(cardsModel: CardsModel, context: Context) {
     var cards by remember { mutableStateOf(cardsModel.cards) }
     var canUseItem by remember { mutableStateOf(false) }
 
@@ -98,22 +99,30 @@ private fun CardList(cardsModel: CardsModel) {
     ) {
         itemsIndexed(cards) { index, card ->
             CardComponent(
+                context = context,
                 card = card,
                 index = index,
                 isLastItem = cards.lastIndex == index,
                 canUseItem = canUseItem
             ) {
+                canUseItem = false
                 moveSelectedCardToLastPosition(cards.toMutableList(), card) {
                     cards = it
                 }
             }
         }
-        item {
-            ThirdButton(
-                onClick = {
-                    canUseItem = !canUseItem
-                }) {
-                Text(text = stringResource(id = R.string.use_this_card))
+        if (!canUseItem) {
+            item {
+                ThirdButton(
+                    onClick = {
+                        // TODO: Comportamento futuro
+//                    moveSelectedCardToFirstPosition(cards.toMutableList(), cards.last()) {
+//                        cards = it
+//                    }
+                        canUseItem = true
+                    }) {
+                    Text(text = stringResource(id = R.string.use_this_card))
+                }
             }
         }
     }
@@ -128,6 +137,19 @@ private fun moveSelectedCardToLastPosition(
     if (index != -1) {
         cardList.removeAt(index)
         cardList.add(selectedCard)
+    }
+    onResult(cardList)
+}
+
+private fun moveSelectedCardToFirstPosition(
+    cardList: MutableList<CardModel>,
+    selectedCard: CardModel,
+    onResult: (MutableList<CardModel>) -> Unit
+) {
+    val index = cardList.indexOf(selectedCard)
+    if (index != -1) {
+        cardList.removeAt(index)
+        cardList.add(FIRST_POSITION, selectedCard)
     }
     onResult(cardList)
 }

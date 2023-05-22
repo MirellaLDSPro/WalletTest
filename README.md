@@ -19,8 +19,13 @@ Este é um projeto de exemplo que demonstra a implementação de um aplicativo d
 1.  Faça o clone deste repositório para o seu ambiente de desenvolvimento local.
 2.  Abra o projeto no Android Studio.
 3.  Aguarde a sincronização do Gradle e a indexação do projeto.
-4.  Conecte um dispositivo Android ou inicie um emulador.
-5.  Execute o aplicativo no dispositivo/emulador selecionado.
+4.  Escolha se usará a API hospedada no Vercel, ou rodará um servidor local.
+5.  Conecte um dispositivo Android ou inicie um emulador.
+6.  Execute o aplicativo no dispositivo/emulador selecionado.
+
+## APIs
+- Vercel - https://wallet-backend-bay.vercel.app/
+- Local - https://github.com/MirellaLDSPro/walletBackend
 
 ## Contribuição
 

@@ -1,6 +1,7 @@
 package dev.mlds.wallettest.data.di
 
 import android.util.Log
+import dev.mlds.wallettest.BuildConfig
 import dev.mlds.wallettest.data.api.CardService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,7 +14,7 @@ object RetrofitConfig {
     private const val OK_HTTP = "Ok Http"
 
     private fun config() = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(BuildConfig.ENDPOINT)
         .client(createOkHttpClient())
         .addConverterFactory(GsonConverterFactory.create())
         .build()

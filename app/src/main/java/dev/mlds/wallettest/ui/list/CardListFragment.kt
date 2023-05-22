@@ -12,10 +12,11 @@ import dev.mlds.wallettest.R
 import dev.mlds.wallettest.databinding.FragmentCardListBinding
 import dev.mlds.wallettest.domain.models.CardModel
 import dev.mlds.wallettest.domain.models.CardsModel
+import dev.mlds.wallettest.ui.commons.BaseFragment
 import dev.mlds.wallettest.ui.test.CardList
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
-class CardListFragment : Fragment() {
+class CardListFragment : BaseFragment() {
 
     private lateinit var viewBinding: FragmentCardListBinding
 
@@ -37,11 +38,7 @@ class CardListFragment : Fragment() {
         }
     }
 
-    private fun nextPageClick() {
+    override fun nextPageClick() {
         findNavController().navigate(R.id.action_cardListFragment_to_createCardFragment)
-    }
-
-    private fun backClick() {
-        findNavController().popBackStack()
     }
 }

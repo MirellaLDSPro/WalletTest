@@ -34,9 +34,11 @@ fun CardComponent(
     card: CardModel,
     index: Int = 0,
     isLastItem: Boolean = true,
+    canUseItem: Boolean = false,
     onCLickItem: (CardModel) -> Unit
 ) {
     var expanded by remember { mutableStateOf(isLastItem) }
+    var isSelect by remember { mutableStateOf(canUseItem) }
 
     if (expanded) {
         Column {
@@ -46,6 +48,7 @@ fun CardComponent(
                     .offset { IntOffset(0, index * (-100)) }
                     .clickable {
 //                        expanded = !expanded
+                        isSelect = !isSelect
                         onCLickItem(card)
                     }
                     .animateContentSize(),
@@ -57,17 +60,15 @@ fun CardComponent(
                 CardOpened(card)
             }
 
-//            if (expanded) {
-//                Spacer(modifier = Modifier.height(50.dp))
-//
-//                PrimaryButton(
-//                    modifier = Modifier.fillMaxWidth(),
-//                    onClick = { /*TODO*/ },
-//                    content = { Text(text = stringResource(id = R.string.next_button)) }
-//                )
-//
-//                Spacer(modifier = Modifier.height(50.dp))
-//            }
+            if (canUseItem && isLastItem) {
+                Spacer(modifier = Modifier.height(50.dp))
+                PrimaryButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = { /*TODO*/ },
+                    content = { Text(text = stringResource(id = R.string.next_button)) }
+                )
+                Spacer(modifier = Modifier.height(50.dp))
+            }
         }
     } else {
         Card(
@@ -76,6 +77,7 @@ fun CardComponent(
                 .offset { IntOffset(0, index * (-95)) }
                 .clickable {
 //                    expanded = !expanded
+                    isSelect = !isSelect
                     onCLickItem(card)
                 }
                 .animateContentSize(),

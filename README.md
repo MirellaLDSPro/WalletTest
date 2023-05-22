@@ -11,8 +11,8 @@ Este é um projeto de exemplo que demonstra a implementação de um aplicativo d
 
 ## Pré-requisitos
 
--   Android Studio 4.2 ou superior.
--   Dispositivo ou emulador com Android 5.0 (API level 21) ou superior.
+-   Android Studio Flamingo ou superior.
+-   Dispositivo ou emulador com Android 5.0 (API level 24) ou superior.
 
 ## Como executar o projeto
 
@@ -24,8 +24,8 @@ Este é um projeto de exemplo que demonstra a implementação de um aplicativo d
 6.  Execute o aplicativo no dispositivo/emulador selecionado.
 
 ## APIs
-- Vercel - https://wallet-backend-bay.vercel.app/
-- Local - https://github.com/MirellaLDSPro/walletBackend
+- Vercel - https://wallet-backend-bay.vercel.app/ [Atualmente está aprensentando problemas na request de POST]
+- Local - https://github.com/MirellaLDSPro/walletBackend [RECOMENTADO]
 
 ## Contribuição
 

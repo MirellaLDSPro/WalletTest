@@ -6,7 +6,7 @@ Este é um projeto de exemplo que demonstra a implementação de um aplicativo d
 
 -   Exibição de cartões de pagamento em um layout de sobreposição.
 -   Possibilidade de adicionar novos cartões à carteira.
--   Remoção de cartões existentes ao deslizar para a esquerda.
+-   Remoção de cartões existentes ao deslizar para a esquerda. [FUTURO]
 -   Animações sutis para fornecer uma experiência de usuário agradável.
 
 ## Pré-requisitos

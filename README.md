@@ -12,7 +12,7 @@ Este é um projeto de exemplo que demonstra a implementação de um aplicativo d
 ## Pré-requisitos
 
 -   Android Studio Flamingo ou superior.
--   Dispositivo ou emulador com Android 5.0 (API level 24) ou superior.
+-   Dispositivo ou emulador com Android 7.0 (API level 24) ou superior.
 
 ## Como executar o projeto
 

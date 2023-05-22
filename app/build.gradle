@@ -14,19 +14,37 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
+        flavorDimensions "environment"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
         compose true
     }
-
+    flavorDimensions "environment"
     buildTypes {
+        debug {
+            debuggable true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        local {
+            dimension "environment"
+            buildConfigField "String", "ENDPOINT", "\"http://192.168.15.75:8080\""
+            applicationIdSuffix ".dev"
+        }
+        vercel {
+            dimension "environment"
+            buildConfigField "String", "ENDPOINT", "\"https://wallet-backend-bay.vercel.app\""
+            applicationIdSuffix ".qa"
         }
     }
 

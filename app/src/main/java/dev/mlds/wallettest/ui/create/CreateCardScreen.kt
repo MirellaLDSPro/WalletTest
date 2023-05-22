@@ -1,6 +1,5 @@
 package dev.mlds.wallettest.ui.create
 
-import android.os.Bundle
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -42,7 +40,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.os.bundleOf
 import dev.mlds.wallettest.R
 import dev.mlds.wallettest.domain.models.CardModel
 import dev.mlds.wallettest.domain.models.Resource
@@ -59,7 +56,7 @@ import org.koin.androidx.compose.koinViewModel
 fun CardCreateScreen(
     viewModel: CreateCardViewModel = koinViewModel(),
     backClick: () -> Unit = {},
-    nextPage: (Bundle) -> Unit = {}
+    nextPage: (card: CardModel) -> Unit = {}
 ) {
 
     val context = LocalContext.current
@@ -79,7 +76,7 @@ fun CardCreateScreen(
             when (card.value) {
                 is Resource.Success -> {
                     val resp = card.value as Resource.Success
-                    nextPage(bundleOf( CreateFragment.CREATE_DATA to ""))
+                    nextPage(resp.data)
                 }
 
                 is Resource.Loading -> {
@@ -117,7 +114,6 @@ fun CardCreateScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateForm(
     clickNext: (cardModel: CardModel) -> Unit

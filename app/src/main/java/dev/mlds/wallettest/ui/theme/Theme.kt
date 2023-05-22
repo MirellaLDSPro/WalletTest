@@ -35,6 +35,7 @@ data class CardColors(
 data class CustomTypography(
     val body: TextStyle,
     val title: TextStyle,
+    val subTitle: TextStyle,
     val label: TextStyle,
     val header: TextStyle
 )
@@ -67,6 +68,7 @@ val LocalCustomTypography = staticCompositionLocalOf {
     CustomTypography(
         body = TextStyle.Default,
         title = TextStyle.Default,
+        subTitle = TextStyle.Default,
         label = TextStyle.Default,
         header = TextStyle.Default
     )
@@ -98,7 +100,8 @@ fun WalletLigthTheme(
 
     val customTypography = CustomTypography(
         body = TextStyle(fontSize = 16.sp),
-        title = TextStyle(fontSize = 28.sp),
+        title = TextStyle(fontSize = 28.sp, color = Text),
+        subTitle = TextStyle(fontSize = 20.sp, color = Text),
         label = TextStyle(fontSize = 14.sp, color = fieldTitle),
         header = TextStyle(fontSize = 22.sp, color = LigthText)
     )

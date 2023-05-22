@@ -46,7 +46,17 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="dev.mlds.wallettest.ui.resume.ResumeFragment"
+        android:name="dev.mlds.wallettest.ui.splash.SplashFragment"
         android:label="@string/label_home"
-        tools:layout="@layout/fragment_resume" />
+        tools:layout="@layout/fragment_splash"/>
+
+    <action
+        android:id="@+id/nav_to_splash"
+        app:destination="@id/splashFragment" />
+
+    <action
+        android:id="@+id/nav_to_list"
+        app:destination="@id/cardListFragment"
+        app:popUpTo="@id/homeFragment"
+        app:popUpToInclusive="false"/>
 </navigation>

@@ -84,7 +84,8 @@ fun ResumeScreen(
                                 name = it.name,
                                 validade = it.validade,
                                 color = it.color
-                            )
+                            ),
+                            onCLickItem = {}
                         )
                     }
                     Spacer(modifier = Modifier.size(22.dp))

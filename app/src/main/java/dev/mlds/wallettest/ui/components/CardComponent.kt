@@ -30,29 +30,54 @@ import dev.mlds.wallettest.domain.models.CardModel
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
 @Composable
-fun CardComponent(card: CardModel, index: Int = 0, isLastItem: Boolean = true) {
+fun CardComponent(
+    card: CardModel,
+    index: Int = 0,
+    isLastItem: Boolean = true,
+    onCLickItem: (CardModel) -> Unit
+) {
     var expanded by remember { mutableStateOf(isLastItem) }
 
     if (expanded) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .offset { IntOffset(0, index * (-100)) }
-                .clickable { expanded = !expanded }
-                .animateContentSize(),
-            shape = RoundedCornerShape(15.dp),
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 5.dp
-            )
-        ) {
-            CardOpened(card)
+        Column {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .offset { IntOffset(0, index * (-100)) }
+                    .clickable {
+//                        expanded = !expanded
+                        onCLickItem(card)
+                    }
+                    .animateContentSize(),
+                shape = RoundedCornerShape(15.dp),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 5.dp
+                )
+            ) {
+                CardOpened(card)
+            }
+
+//            if (expanded) {
+//                Spacer(modifier = Modifier.height(50.dp))
+//
+//                PrimaryButton(
+//                    modifier = Modifier.fillMaxWidth(),
+//                    onClick = { /*TODO*/ },
+//                    content = { Text(text = stringResource(id = R.string.next_button)) }
+//                )
+//
+//                Spacer(modifier = Modifier.height(50.dp))
+//            }
         }
     } else {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
                 .offset { IntOffset(0, index * (-95)) }
-                .clickable { expanded = !expanded }
+                .clickable {
+//                    expanded = !expanded
+                    onCLickItem(card)
+                }
                 .animateContentSize(),
             shape = RoundedCornerShape(15.dp),
             elevation = CardDefaults.cardElevation(
@@ -133,7 +158,8 @@ fun CardComponentPreview() {
                 name = "João Carlos Pereira",
                 validade = "06/29",
                 color = CardModel.CardType.GREEN
-            )
+            ),
+            onCLickItem = {}
         )
     }
 }

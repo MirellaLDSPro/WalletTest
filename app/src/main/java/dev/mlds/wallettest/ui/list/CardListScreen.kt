@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.mlds.wallettest.R
+import dev.mlds.wallettest.domain.models.CardModel
 import dev.mlds.wallettest.domain.models.CardsModel
 import dev.mlds.wallettest.domain.models.Resource
 import dev.mlds.wallettest.ui.components.CardComponent
@@ -95,7 +96,15 @@ private fun CardList(cardsModel: CardsModel) {
         verticalArrangement = Arrangement.Center
     ) {
         itemsIndexed(cards) { index, card ->
-            CardComponent(card = card, index = index, cards.lastIndex == index)
+            CardComponent(
+                card = card,
+                index = index,
+                isLastItem = cards.lastIndex == index
+            ) {
+                moveSelectedCardToLastPosition(cards.toMutableList(), card) {
+                    cards = it
+                }
+            }
         }
         item {
             ThirdButton(
@@ -106,6 +115,19 @@ private fun CardList(cardsModel: CardsModel) {
             }
         }
     }
+}
+
+private fun moveSelectedCardToLastPosition(
+    cardList: MutableList<CardModel>,
+    selectedCard: CardModel,
+    onResult: (MutableList<CardModel>) -> Unit
+) {
+    val index = cardList.indexOf(selectedCard)
+    if (index != -1) {
+        cardList.removeAt(index)
+        cardList.add(selectedCard)
+    }
+    onResult(cardList)
 }
 
 @Preview(name = "CardListScreen Ligth Mode", showBackground = true)

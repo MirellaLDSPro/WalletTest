@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -39,12 +40,10 @@ android {
         local {
             dimension "environment"
             buildConfigField "String", "ENDPOINT", "\"http://192.168.15.75:8080\""
-            applicationIdSuffix ".dev"
         }
         vercel {
             dimension "environment"
             buildConfigField "String", "ENDPOINT", "\"https://wallet-backend-bay.vercel.app\""
-            applicationIdSuffix ".qa"
         }
     }
 
@@ -75,6 +74,10 @@ dependencies {
     def composeBom = platform('androidx.compose:compose-bom:2023.01.00')
     implementation composeBom
     androidTestImplementation composeBom
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:32.0.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // Koin for Android
     implementation "io.insert-koin:koin-android:$koin_version"

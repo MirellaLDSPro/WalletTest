@@ -87,6 +87,7 @@ private fun Body(
 @Composable
 private fun CardList(cardsModel: CardsModel) {
     var cards by remember { mutableStateOf(cardsModel.cards) }
+    var canUseItem by remember { mutableStateOf(false) }
 
     LazyColumn(
         modifier = Modifier
@@ -99,7 +100,8 @@ private fun CardList(cardsModel: CardsModel) {
             CardComponent(
                 card = card,
                 index = index,
-                isLastItem = cards.lastIndex == index
+                isLastItem = cards.lastIndex == index,
+                canUseItem = canUseItem
             ) {
                 moveSelectedCardToLastPosition(cards.toMutableList(), card) {
                     cards = it
@@ -109,7 +111,7 @@ private fun CardList(cardsModel: CardsModel) {
         item {
             ThirdButton(
                 onClick = {
-                    Log.i(">>>", "Usar este cartão")
+                    canUseItem = !canUseItem
                 }) {
                 Text(text = stringResource(id = R.string.use_this_card))
             }

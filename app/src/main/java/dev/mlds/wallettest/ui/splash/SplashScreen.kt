@@ -6,14 +6,21 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavController
 import dev.mlds.wallettest.R
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
+import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen() {
+fun SplashScreen(findNavController: NavController) {
+    LaunchedEffect(Unit) {
+        delay(3000)
+        findNavController.navigate(R.id.nav_to_list)
+    }
     Surface(modifier = Modifier.fillMaxSize()) {
         Box(
             modifier = Modifier
@@ -31,7 +38,6 @@ fun SplashScreen() {
                 painter = painterResource(R.drawable.ic_animation_wallet),
                 contentDescription = null
             )
-
         }
     }
 }

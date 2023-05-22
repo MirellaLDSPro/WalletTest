@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import dev.mlds.wallettest.R
+import dev.mlds.wallettest.domain.models.CardModel
 import dev.mlds.wallettest.ui.theme.WalletLigthTheme
 
 class CreateFragment : Fragment() {
@@ -31,8 +33,11 @@ class CreateFragment : Fragment() {
         }
     }
 
-    private fun nextPage(bundle: Bundle) {
-        findNavController().navigate(R.id.action_createCardFragment_to_resumeFragment)
+    private fun nextPage(card: CardModel) {
+        findNavController().navigate(
+            R.id.action_createCardFragment_to_resumeFragment,
+            bundleOf(CREATE_DATA to card)
+        )
     }
 
     private fun backClick() {

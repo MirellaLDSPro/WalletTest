@@ -25,7 +25,7 @@ Este é um projeto de exemplo que demonstra a implementação de um aplicativo d
 
 ## APIs
 - Vercel - https://wallet-backend-bay.vercel.app/ [Atualmente está aprensentando problemas na request de POST]
-- Local - https://github.com/MirellaLDSPro/walletBackend [RECOMENTADO]
+- Local - https://github.com/MirellaLDSPro/walletBackend [RECOMENDADO]
 
 ## Contribuição
 

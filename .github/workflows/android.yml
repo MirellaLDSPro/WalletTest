@@ -9,9 +9,9 @@ on:
           required: true
           default: 'https://wallet-backend-bay.vercel.app'
   push:
-    branches: [ "ci_cd" ]
+    branches: [ "Main" ]
   pull_request:
-    branches: [ "ci_cd" ]
+    branches: [ "Main" ]
 
 jobs:
   build:
